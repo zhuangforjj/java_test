@@ -58,4 +58,9 @@ class Employee{
         Employee  e=new Employee("jj",50000);
         System.out.println(e.getName()+" :"+e.getSalary());
     }
+
+    public void raiseSalary(double byPecent){
+        double raise=salary*byPecent/100;
+        salary+=raise;
+    }
 }
