@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * @author jj
  * @date 2019/6/27-9:42 PM
@@ -27,11 +29,26 @@ class Employee{
     private double salary;
     private int id;
 
+    static{
+        Random generator=new Random();
+        nextId=generator.nextInt(10000);
+    }
+
+    {
+        id=nextId;
+        nextId++;
+    }
+
     public Employee(String n,double s){
         name=n;
         salary=s;
-        id=0;
     }
+
+    public Employee(double s){
+        this("Emplpyee #"+nextId,s);
+    }
+
+    public Employee(){};
 
     public String  getName(){
         return name;
