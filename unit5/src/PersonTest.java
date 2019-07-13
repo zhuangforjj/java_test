@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * @author jj
@@ -57,6 +58,41 @@ class Employee extends Person{
         double raise=salary*byPercent/100;
         salary+=raise;
     }
+
+    @Override
+    public boolean equals(Object otherObject) {
+
+        //第一步，先判断是不是引用同一个对象，或者都为null
+        if(this==otherObject)   return true;
+
+        //第二步，判断是不是该对象为null
+        if(otherObject==null)    return false;
+
+        //第三步，判断是不是同一个类
+        if(getClass()!=otherObject.getClass())  return false;
+
+        //第四步，创建一个other
+        Employee other=(Employee)otherObject;
+
+        //第五步，对比
+        return Objects.equals(getName(),other.getName())
+                &&salary==other.salary
+                &&Objects.equals(hireDay,other.hireDay);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(),salary,hireDay);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getName()+
+                "[name="+getName()+
+                ",salary="+salary+
+                ",hireDay="+hireDay+
+                "]";
+    }
 }
 
 class Student extends Person{
@@ -69,5 +105,48 @@ class Student extends Person{
     @Override
     public String getDescription() {
         return "a student majoring in "+major;
+    }
+}
+
+class Manager extends Employee{
+    private double bonus;
+
+    public Manager(String name,double salary,int year,int month,int day){
+        super(name,salary,year,month,day);
+        bonus=0;
+    }
+
+    @Override
+    public double getSalary(){
+        double baseSalary=super.getSalary();
+        return baseSalary+bonus;
+    }
+
+    public double getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(double bonus) {
+        this.bonus = bonus;
+    }
+
+    @Override
+    public boolean equals(Object otherObject) {
+        if(!super.equals(otherObject))  return false;
+
+        Manager other=(Manager)otherObject;
+        return bonus==other.bonus;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode()+17*new Double(bonus).hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+
+                "[bonus="+bonus+
+                "]";
     }
 }
