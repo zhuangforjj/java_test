@@ -4,6 +4,14 @@ import java.util.Objects;
 /**
  * @author jj
  * @date 2019/7/4-10:20 AM
+ * 继承
+ * 1.将公共操作放在超类中
+ * 2.不要使用protected
+ * 3.实现"is-a"的关系
+ * 4.继承的方法有意义时，才用继承
+ * 5.覆盖方法时，不要改变预期的行为
+ * 6.多使用多态代替多类型信息
+ * 7.不要过多的使用放射
  */
 public class PersonTest {
     public static void main(String[] args) {
